@@ -1,0 +1,38 @@
+# Servlet
+server.port: 9611
+
+#logging.level.org.springframework.r2dbc: DEBUG
+
+spring:
+  # Messaging
+  cloud.stream:
+    kafka:
+      binder:
+        brokers: localhost:9092
+        autoCreateTopics: true
+        autoAddPartitions: true
+        replicationFactor: 1
+    bindings:
+      product-events-channel-out-0:
+        destination: product-events
+        contentType: application/json
+        producer:
+          partitionCount: 3
+    # DB
+  r2dbc:
+    url: r2dbc:mysql://localhost:3306/product_management_db
+    username: ${PRODUCT_MANAGEMENT_DB_USER:root}
+    password: ${PRODUCT_MANAGEMENT_DB_PWD:root}
+    pool.initial-size: 100
+    pool.max-size: 500
+    pool.max-idle-time: 30m
+    pool.validation-query: SELECT 1
+  flyway:
+    url: jdbc:mysql://localhost:3306/product_management_db
+    locations: db/migration/mysql
+    enabled: true
+
+# Logging
+logging:
+  level:
+    org.apache.kafka: ERROR

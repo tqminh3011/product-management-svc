@@ -1,0 +1,8 @@
+spring:
+  r2dbc:
+    url: r2dbc:tc:mysql:///product_management_db?TC_IMAGE_TAG=8
+  flyway.enabled: false
+  cloud.stream:
+    bindings:
+      product-events-channel-out-0:
+        destination: test-product-events

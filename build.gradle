@@ -37,7 +37,6 @@ dependencies {
 	implementation 'org.flywaydb:flyway-core'
 	implementation 'org.flywaydb:flyway-mysql'
 	implementation "com.github.jasync-sql:jasync-mysql:${jasyncVersion}"
-	implementation "com.github.jasync-sql:jasync-pool:${jasyncVersion}"
 	runtimeOnly("com.github.jasync-sql:jasync-r2dbc-mysql:${jasyncVersion}")
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
@@ -51,17 +50,21 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 
 	// Swagger3 / OpenAPI
-	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springdocVersion}"
+	implementation "org.springdoc:springdoc-openapi-starter-webflux-ui:${springDocVersion}"
 
 	// Test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'org.springframework.cloud:spring-cloud-stream-test-binder'
 	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation "org.testcontainers:junit-jupiter:${testContainersVersion}"
+	testImplementation "org.testcontainers:r2dbc:${testContainersVersion}"
+	testImplementation "org.testcontainers:mysql:${testContainersVersion}"
+	testImplementation "org.testcontainers:kafka:${testContainersVersion}"
 
 	// Others
 //	implementation 'io.netty:netty-resolver-dns-native-macos:4.1.93.Final' // TODO check if we need this dep
-
+	implementation "com.google.guava:guava:${guavaVersion}"
 }
 
 dependencyManagement {
