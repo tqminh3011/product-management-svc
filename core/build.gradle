@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+}
+
+dependencies {
+    // Core module should include very little dependency as it should be developed in Java core only
+    implementation "io.projectreactor:reactor-core:${reactorCoreVersion}"
+    implementation "com.google.guava:guava:${guavaVersion}"
+    implementation "jakarta.validation:jakarta.validation-api:${javaxValidationVersion}"
+
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}

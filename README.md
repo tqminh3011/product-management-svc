@@ -12,7 +12,10 @@ Following technology stacks are applied to build this product-management-svc:
 * Dependency management: **Gradle**
 
 ## Project structure
-TBU
+Includes 2 modules configured with multi-project Gradle support:
+* ```core``` module - contains **true business logic (loosely coupling)** with as least dependency as possible (normally Java core) so that it could be re-used and extended easily. 
+* ```infrastructure``` module - contains **platform-specific code** that tightly couple on frameworks, such as Spring, R2DBC, Kafka,...
+</br> </br> Reference: https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
 
 ## How to run
 ### Prerequisites
@@ -36,6 +39,9 @@ Open terminal in root folder of *product-management-svc* project, execute follow
 1. Keep staying at the root folder, execute following command ```docker-compose up``` for first time running
    </br>(For next time, you can use command ```docker-compose start```)
 2. Execute command ```java -jar build/libs/product-management-svc-1.0.0.jar``` . This will start the Spring Boot service, which should take about <10s depending on your machine.
+</br>
+
+**_NOTES:_** If you're using Mac with Sillicon chips (M1/M2) and fail to start with docker-compose, add following line to `docker-compose.yaml` file at mysql section: ```platform: linux/amd64```
 </br> </br>
 
 ### Step 4: Test the service
@@ -67,3 +73,13 @@ curl -X 'POST' \
   "price": 10.99
 }'
 ```
+
+## Improvement
+Due to limited timeline, this project still needs a lot of improvement in the future (_to be discussed in next session_):
+* **Cover full Unit Test** for rest of the classes
+* Apply **idempotency check** for REST endpoint
+* Apply **transactional outbox** for event producing logic
+* Conduct **performance test** for the service (e.g: using K6)
+* Add custom servlet filters to control **service authorization**
+* Add **SonarQube check** at build step
+* ...

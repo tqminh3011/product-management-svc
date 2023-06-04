@@ -2,8 +2,3 @@ rootProject.name = 'product-management-svc'
 include 'core'
 include 'infrastructure'
 
-dependencyResolutionManagement {
-    repositories {
-        mavenCentral()
-    }
-}
